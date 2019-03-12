@@ -3,6 +3,7 @@ package sandip.example.com.multibhashijokes.di.module
 import android.annotation.SuppressLint
 import android.app.Application
 import android.arch.persistence.room.Room
+import android.content.ContentResolver
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -12,6 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import sandip.example.com.multibhashijokes.data.AppDao
 import sandip.example.com.multibhashijokes.database.AppDatabase
+import sandip.example.com.multibhashijokes.provider.QueryHandler
 import sandip.example.com.multibhashijokes.remote.WebServices
 import sandip.example.com.multibhashijokes.repo.AppRepository
 import sandip.example.com.multibhashijokes.utils.authUtils.TLSSocketFactory
@@ -51,11 +53,16 @@ class AppModule {
     @Singleton
     fun provideGithubDao(database: AppDatabase) = database.appDao()
 
+    @Provides
+    @Singleton
+    fun provideHandler(application: Application) = QueryHandler(application.contentResolver)
+
+
 
     @Provides
     @Singleton
-    fun provideAppRepository(webservice: WebServices, executor: AppExecutors, dao: AppDao) =
-        AppRepository(webservice, executor, dao)
+    fun provideAppRepository(executor: AppExecutors, handler: QueryHandler) =
+        AppRepository(executor, handler)
 
 
     @SuppressLint("NewApi")
