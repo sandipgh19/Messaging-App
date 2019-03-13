@@ -6,9 +6,13 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.google.gson.Gson
+import sandip.example.com.multibhashijokes.AppController
 
 import sandip.example.com.multibhashijokes.R
 import sandip.example.com.multibhashijokes.di.Injectable
@@ -25,6 +29,8 @@ class MessageListFragment : Fragment(), Injectable {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    //var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +59,9 @@ class MessageListFragment : Fragment(), Injectable {
         viewModel.result.observe(this, Observer { listResource ->
             // we don't need any null checks here for the adapter since LiveData guarantees that
             // it won't call us if fragment is stopped or not started.
+            Log.e("Size", "Message: $listResource")
+            Toast.makeText(AppController.instance, "Message ${Gson().toJson(listResource)}", Toast.LENGTH_LONG).show()
+
 
         })
     }
