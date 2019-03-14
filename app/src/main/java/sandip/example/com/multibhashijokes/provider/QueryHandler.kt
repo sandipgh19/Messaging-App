@@ -27,6 +27,12 @@ class QueryHandler(val resolver: ContentResolver) : AsyncQueryHandler(resolver) 
                         do {
                             val message = Message()
                             message.coloumID = cursor.getString(cursor.getColumnIndex("_id"))
+                            message.body = cursor.getString(cursor.getColumnIndex("body"))
+                            message.person = cursor.getString(cursor.getColumnIndex("person"))
+                            message.address = cursor.getString(cursor.getColumnIndex("address"))
+                            message.date = cursor.getString(cursor.getColumnIndex("date"))
+                            message.type = cursor.getString(cursor.getColumnIndex("type"))
+                            message.threadID = cursor.getString(cursor.getColumnIndex("thread_id"))
 
                             messageList.add(message)
 

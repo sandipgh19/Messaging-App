@@ -18,6 +18,7 @@ class AppRepository @Inject constructor(
 
     fun fetchData(): MutableLiveData<List<Message>> {
         Log.e("Fetch Data: ", "Data Fetch")
+        //var selection = "date >= ${System.currentTimeMillis()} - 2"
         return query(
             0,
             Uri.parse("content://sms/"), null, null,
@@ -41,7 +42,7 @@ class AppRepository @Inject constructor(
             selection, selectionArgs, orderby
         ))}")
         Log.e("Fetch Result: ", "Data Result ${Gson().toJson(result)}")
-        Toast.makeText(AppController.instance, "Data Fetch ${Gson().toJson(result)}", Toast.LENGTH_LONG).show()
+        //Toast.makeText(AppController.instance, "Data Fetch ${Gson().toJson(result)}", Toast.LENGTH_LONG).show()
         return result
     }
 }

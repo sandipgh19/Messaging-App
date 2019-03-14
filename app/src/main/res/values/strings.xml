@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">Multibhashi Jokes</string>
+    <string name="app_name">Message</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="empty_text">--/--</string>
+    <string name="time_format">hh:mm aa</string>
 </resources>
