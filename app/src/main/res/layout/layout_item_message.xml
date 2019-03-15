@@ -5,6 +5,7 @@
 
     <data>
         <variable name="message" type="sandip.example.com.multibhashijokes.object.Message"/>
+        <variable name="timeStamp" type="String"/>
     </data>
 
 
@@ -12,6 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
+            android:background="@{message.date == timeStamp ? @color/lightgrey : @android:color/transparent, default=@android:color/transparent}"
             android:padding="4dp">
 
 
@@ -21,7 +23,10 @@
                   app:layout_constraintStart_toStartOf="parent"
                   app:layout_constraintEnd_toEndOf="parent"
                   app:layout_constraintTop_toTopOf="parent"
-                  android:gravity="center"
+                  android:gravity="start"
+                  app:visibleGone="@{message.isVisible}"
+                  android:text="@{message.header}"
+                  android:paddingBottom="8dp"
                   android:textColor="@android:color/background_dark"
                   style="@style/Base.TextAppearance.AppCompat.Title"
                   tools:text="1 hours ago:"/>
@@ -29,7 +34,6 @@
         <TextView android:layout_width="0dp"
                   android:layout_height="wrap_content"
                   android:id="@+id/number"
-                  android:layout_marginTop="@dimen/default_gap"
                   app:layout_constraintStart_toStartOf="parent"
                   app:layout_constraintEnd_toStartOf="@id/message_time"
                   app:layout_constraintTop_toBottomOf="@id/time"

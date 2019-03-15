@@ -5,6 +5,7 @@
 
     <data>
 
+        <variable name="count" type="Integer"/>
         <variable name="adapter" type="sandip.example.com.multibhashijokes.adapter.MessageAdapter"/>
 
     </data>
@@ -27,6 +28,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:clipToPadding="false"/>
+
+        <include
+            layout="@layout/layout_no_data"
+            app:count="@{count}"
+            app:displayText="@{@string/no_data}"/>
 
     </android.support.constraint.ConstraintLayout>
 

@@ -15,10 +15,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import sandip.example.com.multibhashijokes.R
+import sandip.example.com.multibhashijokes.`object`.Message
 import sandip.example.com.multibhashijokes.adapter.MessageAdapter
 import sandip.example.com.multibhashijokes.binding.FragmentDataBindingComponent
 import sandip.example.com.multibhashijokes.databinding.FragmentMessageListBinding
 import sandip.example.com.multibhashijokes.di.Injectable
+import sandip.example.com.multibhashijokes.helper.ConverterUtils
 import sandip.example.com.multibhashijokes.utils.helperUtils.AppExecutors
 import sandip.example.com.multibhashijokes.utils.helperUtils.autoCleared
 import sandip.example.com.multibhashijokes.utils.permissionUtil.BaseFragment
@@ -42,8 +44,17 @@ class MessageListFragment : BaseFragment(), Injectable {
 
     var binding by autoCleared<FragmentMessageListBinding>()
 
+    var timeStamp = System.currentTimeMillis().toString()
+
     @Inject
     lateinit var executors: AppExecutors
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        timeStamp = activity?.intent?.getStringExtra("timestamp")?:System.currentTimeMillis().toString()
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,14 +82,12 @@ class MessageListFragment : BaseFragment(), Injectable {
 
         initViewModel(viewModel = viewModel)
 
-        adapter = MessageAdapter(dataBindingComponent = dataBindingComponent, appExecutors = executors)
+        adapter = MessageAdapter(dataBindingComponent = dataBindingComponent, appExecutors = executors, timeStamp = timeStamp)
 
         binding.let {
             it.adapter = adapter
             it.lifecycleOwner = this
         }
-
-        viewModel.init(refID = "value")
 
         requestCall()
     }
@@ -105,10 +114,17 @@ class MessageListFragment : BaseFragment(), Injectable {
         viewModel.result.observe(this, Observer { listResource ->
             // we don't need any null checks here for the adapter since LiveData guarantees that
             // it won't call us if fragment is stopped or not started.
-            Log.e("Size", "Message: $listResource")
-            adapter.submitList(listResource)
-            //Toast.makeText(AppController.instance, "Message ${Gson().toJson(listResource)}", Toast.LENGTH_LONG).show()
 
+            listResource?.mapIndexed { index, message ->
+                message.header = ConverterUtils().getHour(message.date)
+                if (index==0) message.isVisible = true
+                else {
+                    ConverterUtils().checkValues(listResource[index-1].header, listResource[index].header)
+                }
+            }
+
+            binding.count = listResource?.size?:0
+            adapter.submitList(listResource)
 
         })
     }

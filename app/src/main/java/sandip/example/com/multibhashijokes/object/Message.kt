@@ -21,6 +21,8 @@ data class Message(
     var subject: String? = "",
     var body: String? = "",
     var seen: String? = "",
-    var outTime: String? = ""
+    var outTime: String? = "",
+    var header: String = "",
+    var isVisible: Boolean = false
 
 )

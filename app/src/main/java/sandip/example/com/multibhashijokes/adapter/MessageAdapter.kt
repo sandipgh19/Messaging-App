@@ -13,7 +13,8 @@ import sandip.example.com.multibhashijokes.utils.helperUtils.AppExecutors
 
 class MessageAdapter (
     private val dataBindingComponent: DataBindingComponent,
-    appExecutors: AppExecutors
+    appExecutors: AppExecutors,
+    val timeStamp: String
 ) : DataBoundListAdapter<Message, LayoutItemMessageBinding>(
     appExecutors = appExecutors,
     diffCallback = object : DiffUtil.ItemCallback<Message>() {
@@ -39,8 +40,8 @@ class MessageAdapter (
         return binding
     }
 
-    override fun bind(binding: LayoutItemMessageBinding, item: Message) {
-        //binding.item = item
+    override fun bind(binding: LayoutItemMessageBinding, item: Message, position: Int) {
         binding.message = item
+        binding.timeStamp = timeStamp
     }
 }

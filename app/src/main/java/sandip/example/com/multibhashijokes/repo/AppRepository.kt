@@ -2,6 +2,7 @@ package sandip.example.com.multibhashijokes.repo
 
 import android.arch.lifecycle.MutableLiveData
 import android.net.Uri
+import android.support.annotation.WorkerThread
 import android.util.Log
 import android.widget.Toast
 import com.google.gson.Gson
@@ -17,15 +18,15 @@ class AppRepository @Inject constructor(
     private val mQueryHandler: QueryHandler) {
 
     fun fetchData(): MutableLiveData<List<Message>> {
-        Log.e("Fetch Data: ", "Data Fetch")
-        //var selection = "date >= ${System.currentTimeMillis()} - 2"
+        val selection = "date >= ${System.currentTimeMillis()} - ${172800000}"
         return query(
             0,
-            Uri.parse("content://sms/"), null, null,
-            null, null
+            Uri.parse("content://sms/"), projection = null, selection = selection,
+            selectionArgs = null, orderby = null
         )
     }
 
+    @WorkerThread
     private fun query(
         token: Int, uri: Uri,
         projection: Array<String>?, selection: String?,
@@ -36,13 +37,10 @@ class AppRepository @Inject constructor(
 
         // Pass MutableLiveData in as a cookie, so we can set the result
         // in OnQueryComplete
-
-        Log.e("Query: ", "Query: ${Gson().toJson(mQueryHandler.startQuery(
+        mQueryHandler.startQuery(
             token, result, uri, projection,
             selection, selectionArgs, orderby
-        ))}")
-        Log.e("Fetch Result: ", "Data Result ${Gson().toJson(result)}")
-        //Toast.makeText(AppController.instance, "Data Fetch ${Gson().toJson(result)}", Toast.LENGTH_LONG).show()
+        )
         return result
     }
 }

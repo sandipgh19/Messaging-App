@@ -5,4 +5,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="empty_text">--/--</string>
     <string name="time_format">hh:mm aa</string>
+    <string name="no_data">No Data Found</string>
+
 </resources>
