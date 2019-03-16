@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="@{message.date == timeStamp ? @color/lightgrey : @android:color/transparent, default=@android:color/transparent}"
+            android:background="@{message.date.equalsIgnoreCase(timeStamp) ? @color/lightgrey : @android:color/transparent, default=@android:color/transparent}"
             android:padding="4dp">
 
 

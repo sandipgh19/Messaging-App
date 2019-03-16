@@ -70,6 +70,7 @@ kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 kotlin.test = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
 kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 kotlin.allopen = "org.jetbrains.kotlin:kotlin-allopen:$versions.kotlin"
+kotlin.reflect = "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
 deps.kotlin = kotlin
 
 def navigation = [:]
@@ -88,7 +89,7 @@ deps.glide="com.github.bumptech.glide:glide:$versions.glide"
 ext.deps = deps
 
 def build_versions = [:]
-build_versions.min_sdk = 16
+build_versions.min_sdk = 19
 build_versions.target_sdk = 27
 build_versions.build_tools = "28.0.3"
 ext.build_versions = build_versions

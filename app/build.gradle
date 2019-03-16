@@ -55,6 +55,7 @@ dependencies {
     implementation deps.retrofit.gson
 
     implementation deps.kotlin.stdlib
+    implementation deps.kotlin.reflect
 
     implementation deps.dagger.runtime
     implementation deps.dagger.android

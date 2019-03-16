@@ -2,18 +2,29 @@ package sandip.example.com.multibhashijokes.fragments
 
 
 import android.Manifest
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
+import android.content.Intent
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
+import android.graphics.Color
+import android.media.RingtoneManager
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.NotificationCompat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import sandip.example.com.multibhashijokes.MainActivity
 import sandip.example.com.multibhashijokes.R
 import sandip.example.com.multibhashijokes.`object`.Message
 import sandip.example.com.multibhashijokes.adapter.MessageAdapter
@@ -119,7 +130,7 @@ class MessageListFragment : BaseFragment(), Injectable {
                 message.header = ConverterUtils().getHour(message.date)
                 if (index==0) message.isVisible = true
                 else {
-                    ConverterUtils().checkValues(listResource[index-1].header, listResource[index].header)
+                    message.isVisible = ConverterUtils().checkValues(listResource[index-1].header, listResource[index].header)
                 }
             }
 
