@@ -6,7 +6,7 @@
     <data>
 
         <variable name="count" type="Integer"/>
-        <variable name="adapter" type="sandip.example.com.multibhashijokes.adapter.MessageAdapter"/>
+        <variable name="adapter" type="sandip.example.com.message.adapter.MessageAdapter"/>
 
     </data>
 

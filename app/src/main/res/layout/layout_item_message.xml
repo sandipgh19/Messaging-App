@@ -4,8 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="message" type="sandip.example.com.multibhashijokes.object.Message"/>
-        <variable name="timeStamp" type="String"/>
+        <variable name="message" type="sandip.example.com.message.object.Message"/>
     </data>
 
 
@@ -13,7 +12,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="@{message.date.equalsIgnoreCase(timeStamp) ? @color/lightgrey : @android:color/transparent, default=@android:color/transparent}"
             android:padding="4dp">
 
 
@@ -38,17 +36,20 @@
                   app:layout_constraintEnd_toStartOf="@id/message_time"
                   app:layout_constraintTop_toBottomOf="@id/time"
                   tools:text="123456733"
+                  android:background="@{message.isChangeBackground ? @color/lightgrey : @android:color/transparent, default=@android:color/transparent}"
                   android:textColor="@android:color/background_dark"
                   android:text="@{message.address}"
                   style="@style/TextAppearance.AppCompat.Subhead"/>
 
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+        <TextView android:layout_width="0dp" android:layout_height="0dp"
                   app:layout_constraintEnd_toEndOf="parent"
                   android:id="@+id/message_time"
                   tools:text="122222"
-                  android:gravity="end"
+                  android:gravity="end|center"
+                  android:background="@{message.isChangeBackground ? @color/lightgrey : @android:color/transparent, default=@android:color/transparent}"
                   app:timeStamp="@{message.date}"
                   app:format="@{@string/time_format}"
+                  app:layout_constraintBottom_toBottomOf="@id/number"
                   app:emptyTxt="@{@string/empty_text}"
                   style="@style/Base.TextAppearance.AppCompat.Caption"
                   app:layout_constraintTop_toTopOf="@id/number"
@@ -60,6 +61,7 @@
                   app:layout_constraintEnd_toEndOf="parent"
                   app:layout_constraintTop_toBottomOf="@id/number"
                   android:text="@{message.body}"
+                  android:background="@{message.isChangeBackground ? @color/lightgrey : @android:color/transparent, default=@android:color/transparent}"
                   android:textColor="@android:color/background_dark"
                   style="@style/Base.TextAppearance.AppCompat.Caption"
                   tools:text="Messagge"/>

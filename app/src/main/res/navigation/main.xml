@@ -5,6 +5,6 @@
 
 
     <fragment android:id="@+id/messageListFragment"
-              android:name="sandip.example.com.multibhashijokes.fragments.MessageListFragment"
+              android:name="sandip.example.com.message.fragments.MessageListFragment"
               android:label="MessageListFragment"/>
 </navigation>
